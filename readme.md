@@ -1,7 +1,7 @@
 ## byte
 
 ```ts
-import byte from 'https://deno.land/x/byte@v0.1.0/byte.ts'
+import byte from 'https://deno.land/x/byte@v0.1.1/byte.ts'
 
 /*
  * Convert bytes to a readable size.
