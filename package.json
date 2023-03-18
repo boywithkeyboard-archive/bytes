@@ -1,0 +1,14 @@
+{
+  "name": "@azury/byte",
+  "version": "3.1.0",
+  "author": "Samuel Kopp (https://samuelkopp.de)",
+  "license": "Apache-2.0",
+  "main": "byte.js",
+  "exports": "./byte.js",
+  "types": "byte.d.ts",
+  "files": [
+    "byte.js",
+    "byte.d.ts"
+  ],
+  "type": "module"
+}
