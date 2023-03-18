@@ -4,5 +4,9 @@
       "semiColons": false,
       "singleQuote": true
     }
+  },
+  "tasks": {
+    "build": "npx -p typescript tsc --target esnext --module es2022 --lib \"dom,dom.iterable,esnext\" --declaration --emitDeclarationOnly --outDir types --newLine lf byte.ts && cp types/byte.d.ts byte.d.ts && rm -rf types && deno run -A https://deno.land/x/esbuild@v0.17.12/mod.js byte.ts --bundle --minify --allow-overwrite --format=esm --outfile=byte.js && deno fmt --ignore=byte.js",
+    "publish": "deno task build && npm publish --access=public"
   }
 }
