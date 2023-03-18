@@ -1,8 +1,26 @@
 ## byte
 
-```ts
-import byte from 'https://deno.land/x/byte@v3.0.0/byte.ts'
+### Setup
 
+#### Deno
+
+```ts
+import byte from 'https://deno.land/x/byte@v3.1.0/byte.ts'
+```
+
+#### Node.js
+
+```bash
+npm i @azury/byte
+```
+
+```ts
+import byte from '@azury/byte'
+```
+
+### Usage
+
+```ts
 /*
  * Convert bytes to a readable size.
  */
