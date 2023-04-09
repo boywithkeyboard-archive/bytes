@@ -5,7 +5,7 @@
 #### Deno
 
 ```ts
-import byte from 'https://deno.land/x/byte@v3.1.0/byte.ts'
+import byte from 'https://deno.land/x/byte@v3.2.0/byte.ts'
 ```
 
 #### Node.js
@@ -16,6 +16,12 @@ npm i @azury/byte
 
 ```ts
 import byte from '@azury/byte'
+```
+
+#### Browser
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@azury/byte@3.2.0"></script>
 ```
 
 ### Usage

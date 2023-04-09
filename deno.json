@@ -6,7 +6,10 @@
     }
   },
   "tasks": {
-    "build": "npx -p typescript tsc --target esnext --module es2022 --lib \"dom,dom.iterable,esnext\" --declaration --emitDeclarationOnly --outDir types --newLine lf byte.ts && cp types/byte.d.ts byte.d.ts && rm -rf types && deno run -A https://deno.land/x/esbuild@v0.17.12/mod.js byte.ts --bundle --minify --allow-overwrite --format=esm --outfile=byte.js && deno fmt --ignore=byte.js",
+    "build:types": "npx -p typescript tsc --target esnext --module es2022 --lib \"dom,dom.iterable,esnext\" --declaration --emitDeclarationOnly --outDir types --newLine lf byte.ts && cp types/byte.d.ts byte.d.ts && rm -rf types",
+    "build:esm": "deno run -A https://deno.land/x/esbuild@v0.17.15/mod.js byte.ts --bundle --minify --allow-overwrite --format=esm --outfile=byte.js",
+    "build:iife": "deno run -A https://deno.land/x/esbuild@v0.17.15/mod.js byte.ts --bundle --minify --allow-overwrite --format=iife --global-name=byte --outfile=byte.iife.js && deno run -A .github/postBuild.ts",
+    "build": "deno task build:esm && deno task build:iife && deno task build:types && deno fmt --ignore=byte.js,byte.cjs",
     "publish": "deno task build && npm publish --access=public"
   }
 }
