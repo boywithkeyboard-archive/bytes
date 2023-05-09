@@ -1,15 +1,14 @@
 {
   "fmt": {
-    "options": {
-      "semiColons": false,
-      "singleQuote": true
-    }
+    "semiColons": false,
+    "singleQuote": true
   },
   "tasks": {
     "build:types": "npx -p typescript tsc --target esnext --module es2022 --lib \"dom,dom.iterable,esnext\" --declaration --emitDeclarationOnly --outDir types --newLine lf byte.ts && cp types/byte.d.ts byte.d.ts && rm -rf types",
-    "build:esm": "deno run -A https://deno.land/x/esbuild@v0.17.15/mod.js byte.ts --bundle --minify --allow-overwrite --format=esm --outfile=byte.js",
-    "build:iife": "deno run -A https://deno.land/x/esbuild@v0.17.15/mod.js byte.ts --bundle --minify --allow-overwrite --format=iife --global-name=byte --outfile=byte.iife.js && deno run -A .github/postBuild.ts",
-    "build": "deno task build:esm && deno task build:iife && deno task build:types && deno fmt --ignore=byte.js,byte.cjs",
+    "build:esm": "deno run -A https://deno.land/x/esbuild@v0.17.18/mod.js byte.ts --bundle --minify --allow-overwrite --format=esm --outfile=byte.mjs",
+    "build:cjs": "deno run -A https://deno.land/x/esbuild@v0.17.18/mod.js byte.ts --bundle --minify --allow-overwrite --format=cjs --outfile=byte.cjs",
+    "build:iife": "deno run -A https://deno.land/x/esbuild@v0.17.18/mod.js byte.ts --bundle --minify --allow-overwrite --format=iife --global-name=byte --outfile=byte.iife.js",
+    "build": "deno task build:esm && deno task build:cjs && deno task build:iife && deno task build:types && deno fmt --ignore=byte.mjs,byte.cjs,byte.iife.js && deno run -A .github/postBuild.ts",
     "publish": "deno task build && npm publish --access=public"
   }
 }

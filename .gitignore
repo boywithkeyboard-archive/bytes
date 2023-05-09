@@ -1,3 +1,4 @@
 byte.d.ts
-byte.js
+byte.mjs
+byte.cjs
 byte.iife.js

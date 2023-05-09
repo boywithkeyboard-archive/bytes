@@ -5,7 +5,7 @@
 #### Deno
 
 ```ts
-import byte from 'https://deno.land/x/byte@v3.2.0/byte.ts'
+import byte from 'https://deno.land/x/byte@v3.3.0/byte.ts'
 ```
 
 #### Node.js
@@ -15,13 +15,17 @@ npm i @azury/byte
 ```
 
 ```ts
+// ESM
 import byte from '@azury/byte'
+
+// CommonJS
+const byte = require('@azury/byte')
 ```
 
 #### Browser
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@azury/byte@3.2.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@azury/byte@3.3.0"></script>
 ```
 
 ### Usage

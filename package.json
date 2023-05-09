@@ -1,16 +1,29 @@
 {
   "name": "@azury/byte",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "author": "Samuel Kopp (https://samuelkopp.de)",
   "license": "Apache-2.0",
   "description": "A disk unit conversion library for JavaScript.",
-  "main": "byte.js",
+  "main": "byte.cjs",
+  "module": "byte.mjs",
   "browser": "./byte.iife.js",
   "types": "byte.d.ts",
   "files": [
-    "byte.js",
+    "byte.mjs",
+    "byte.cjs",
     "byte.iife.js",
     "byte.d.ts"
   ],
-  "type": "module"
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./byte.d.ts",
+        "default": "./byte.mjs"
+      },
+      "require": {
+        "types": "./byte.d.ts",
+        "default": "./byte.cjs"
+      }
+    }
+  }
 }
