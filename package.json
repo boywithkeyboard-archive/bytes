@@ -1,29 +1,40 @@
 {
-  "name": "@azury/byte",
-  "version": "3.3.0",
+  "name": "@boywithkeyboard/bytes",
+  "version": "4.0.0",
   "author": "Samuel Kopp (https://samuelkopp.de)",
   "license": "Apache-2.0",
   "description": "A disk unit conversion library for JavaScript.",
-  "main": "byte.cjs",
-  "module": "byte.mjs",
-  "browser": "./byte.iife.js",
-  "types": "byte.d.ts",
+  "funding": "https://github.com/sponsors/boywithkeyboard",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "files": [
-    "byte.mjs",
-    "byte.cjs",
-    "byte.iife.js",
-    "byte.d.ts"
+    "./dist/index.d.ts",
+    "./dist/index.mjs",
+    "./dist/index.cjs"
   ],
   "exports": {
     ".": {
       "import": {
-        "types": "./byte.d.ts",
-        "default": "./byte.mjs"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
       },
       "require": {
-        "types": "./byte.d.ts",
-        "default": "./byte.cjs"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
       }
     }
+  },
+  "scripts": {
+    "build": "builder --esm --cjs && tsc",
+    "test": "node test.mjs"
+  },
+  "devDependencies": {
+    "@boywithkeyboard/builder": "^0.4.0",
+    "@types/node": "^20.8.9",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
