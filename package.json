@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "description": "A disk unit conversion library for JavaScript.",
   "funding": "https://github.com/sponsors/boywithkeyboard",
+  "repository": "github:boywithkeyboard/bytes",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -27,7 +28,7 @@
   },
   "scripts": {
     "build": "builder --esm --cjs && tsc",
-    "test": "node test.mjs"
+    "test": "npm run build && tsc && node test.mjs"
   },
   "devDependencies": {
     "@boywithkeyboard/builder": "^0.4.0",
