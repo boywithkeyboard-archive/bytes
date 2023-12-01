@@ -18,7 +18,7 @@
     "incremental": true
   },
   "include": [
-    "./index.ts"
+    "index.ts"
   ],
   "exclude": [
     "dist",

@@ -90,6 +90,8 @@ const UNITS: readonly [string, string, number][] = [
   ['YiB', 'Yobibyte', YiB]
 ]
 
+export const INPUT_PATTERN = /^[1-9][0-9]* (B|KB|MB|GB|TB|PB|EB|ZB|YT|KiB|MiB|GiB|TiB|PiB|EiB|ZiB|YiB|(Byte|Kilobyte|Megabyte|Gigabyte|Terabyte|Petabyte|Exabyte|Zettabyte|Yottabyte|Kibibyte|Mebibyte|Gibibyte|Tebibyte|Pebibyte|Exbibyte|Zebibyte|Yobibyte)s?)$/
+
 /**
  * Convert bytes to readable size and vice versa.
  */
@@ -190,6 +192,9 @@ export function bytes(
       )
       : b(1, 'Byte', 'B')
   } else {
+    if (!INPUT_PATTERN.test(value))
+      throw new Error('Please enter a valid string value, e.g. "25 Kilobytes"!')
+
     const arr = value.split(' ')
 
     if (arr.length !== 2)
