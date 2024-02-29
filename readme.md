@@ -5,7 +5,7 @@
 #### Deno
 
 ```ts
-import { bytes } from 'https://den.ooo/bytes/index.ts'
+import { bytes } from 'https://esm.sh/@boywithkeyboard/bytes'
 ```
 
 #### Node.js
