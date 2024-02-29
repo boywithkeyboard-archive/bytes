@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build": "tsc && esbuild main.ts --bundle --minify --format=esm --outfile=build/main.mjs && esbuild main.ts --bundle --minify --format=cjs --outfile=build/main.cjs",
-    "test": "npm run build && tsc && node test.mjs"
+    "test": "npm run build && node test.mjs"
   },
   "devDependencies": {
     "@types/node": "^20.11.22",

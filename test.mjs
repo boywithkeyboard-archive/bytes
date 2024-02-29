@@ -1,6 +1,6 @@
 import { strictEqual } from 'node:assert'
 import { test } from 'node:test'
-import { bytes } from './dist/index.mjs'
+import { bytes } from './build/main.mjs'
 
 test('bytes to readable size', () => {
   strictEqual(bytes(100), '100 B')
