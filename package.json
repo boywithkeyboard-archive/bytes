@@ -6,33 +6,31 @@
   "description": "A disk unit conversion library for JavaScript.",
   "funding": "https://github.com/sponsors/boywithkeyboard",
   "repository": "github:boywithkeyboard/bytes",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "./build/main.cjs",
+  "module": "./build/main.mjs",
+  "types": "./build/main.d.ts",
   "files": [
-    "./dist/index.d.ts",
-    "./dist/index.mjs",
-    "./dist/index.cjs"
+    "./build"
   ],
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.mjs"
+        "types": "./build/main.d.ts",
+        "default": "./build/main.mjs"
       },
       "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.cjs"
+        "types": "./build/main.d.ts",
+        "default": "./build/main.cjs"
       }
     }
   },
   "scripts": {
-    "build": "builder --esm --cjs && tsc",
+    "build": "tsc && esbuild main.ts --bundle --minify --format=esm --outfile=build/main.mjs && esbuild main.ts --bundle --minify --format=cjs --outfile=build/main.cjs",
     "test": "npm run build && tsc && node test.mjs"
   },
   "devDependencies": {
-    "@boywithkeyboard/builder": "^0.4.2",
     "@types/node": "^20.11.22",
+    "esbuild": "^0.20.1",
     "typescript": "^5.3.3"
   },
   "engines": {

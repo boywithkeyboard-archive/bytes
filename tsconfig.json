@@ -12,16 +12,16 @@
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "moduleResolution": "bundler",
-    "outDir": "dist",
+    "outDir": "build",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true
   },
   "include": [
-    "index.ts"
+    "main.ts"
   ],
   "exclude": [
-    "dist",
+    "build",
     "node_modules"
   ]
 }
