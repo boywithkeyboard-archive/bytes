@@ -30,7 +30,7 @@
     "test": "npm run build && node test.mjs"
   },
   "devDependencies": {
-    "@types/node": "^20.11.28",
+    "@types/node": "^20.11.30",
     "esbuild": "^0.20.2",
     "typescript": "^5.4.2"
   },
