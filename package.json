@@ -1,6 +1,6 @@
 {
   "name": "@boywithkeyboard/bytes",
-  "version": "4.1.1",
+  "version": "5.0.0",
   "author": "Samuel Kopp (https://samuelkopp.de)",
   "license": "Apache-2.0",
   "description": "A disk unit conversion library for JavaScript.",
