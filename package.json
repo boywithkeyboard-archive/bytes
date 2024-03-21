@@ -5,36 +5,16 @@
   "license": "Apache-2.0",
   "description": "A disk unit conversion library for JavaScript.",
   "funding": "https://github.com/sponsors/boywithkeyboard",
-  "repository": "github:boywithkeyboard/bytes",
-  "main": "./build/main.cjs",
-  "module": "./build/main.mjs",
-  "types": "./build/main.d.ts",
-  "files": [
-    "./build"
+  "repository": "boywithkeyboard/bytes",
+  "keywords": [
+    "bytes",
+    "conversion"
   ],
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./build/main.d.ts",
-        "default": "./build/main.mjs"
-      },
-      "require": {
-        "types": "./build/main.d.ts",
-        "default": "./build/main.cjs"
-      }
-    }
-  },
   "scripts": {
-    "build": "tsc && esbuild main.ts --bundle --minify --format=esm --outfile=build/main.mjs && esbuild main.ts --bundle --minify --format=cjs --outfile=build/main.cjs",
-    "prepublishOnly": "npm test",
-    "test": "npm run build && node test.mjs"
+    "build": "builder index.ts:index.js"
   },
   "devDependencies": {
-    "@types/node": "^20.11.28",
-    "esbuild": "^0.20.2",
-    "typescript": "^5.4.2"
-  },
-  "engines": {
-    "node": ">=18"
+    "@boywithkeyboard/builder": "^0.12.0",
+    "typescript": "^5.4.3"
   }
 }
