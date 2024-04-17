@@ -14,7 +14,7 @@
     "build": "builder index.ts:index.js"
   },
   "devDependencies": {
-    "@boywithkeyboard/builder": "^0.12.0",
+    "@boywithkeyboard/builder": "^0.14.0",
     "typescript": "^5.4.3"
   }
 }
