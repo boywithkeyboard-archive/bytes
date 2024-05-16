@@ -1,6 +1,6 @@
 import { strictEqual } from 'node:assert'
 import { test } from 'node:test'
-import { bytes } from './build/main.mjs'
+import { bytes } from './build/index.js'
 
 test('bytes to readable size', () => {
   strictEqual(bytes(100), '100 B')
@@ -8,13 +8,13 @@ test('bytes to readable size', () => {
   strictEqual(bytes(50000000), '50 MB')
   strictEqual(bytes(1000000000000), '1 TB')
 
-  strictEqual(bytes(25 * 1024, { prefix: 'binary' }), '25 KiB')
-  strictEqual(bytes(50 * 1024 * 1024, { prefix: 'binary' }), '50 MiB')
-  strictEqual(bytes(1 * 1024 * 1024 * 1024 * 1024, { prefix: 'binary' }), '1 TiB')
+  strictEqual(bytes(25 * 1024, { unit: 'binary' }), '25 KiB')
+  strictEqual(bytes(50 * 1024 * 1024, { unit: 'binary' }), '50 MiB')
+  strictEqual(bytes(1 * 1024 * 1024 * 1024 * 1024, { unit: 'binary' }), '1 TiB')
 
-  strictEqual(bytes(25 * 1024, { long: true, prefix: 'binary' }), '25 Kibibytes')
-  strictEqual(bytes(50 * 1024 * 1024, { long: true, prefix: 'binary' }), '50 Mebibytes')
-  strictEqual(bytes(1 * 1024 * 1024 * 1024 * 1024, { long: true, prefix: 'binary' }), '1 Tebibyte')
+  strictEqual(bytes(25 * 1024, { fmt: 'long', unit: 'binary' }), '25 Kibibytes')
+  strictEqual(bytes(50 * 1024 * 1024, { fmt: 'long', unit: 'binary' }), '50 Mebibytes')
+  strictEqual(bytes(1 * 1024 * 1024 * 1024 * 1024, { fmt: 'long', unit: 'binary' }), '1 Tebibyte')
 })
 
 test('readable size to bytes', () => {
