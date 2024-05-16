@@ -51,46 +51,27 @@ export type Unit =
   | 'Yobibyte'
   | 'Yobibytes'
 
-const KB = 1000
-, MB = KB * 1000
-, GB = MB * 1000
-, TB = GB * 1000
-, PB = TB * 1000
-, EB = PB * 1000
-, ZB = EB * 1000
-, YB = ZB * 1000
-, KiB = 1024
-, MiB = KiB * 1024
-, GiB = MiB * 1024
-, TiB = GiB * 1024
-, PiB = TiB * 1024
-, EiB = PiB * 1024
-, ZiB = EiB * 1024
-, YiB = ZiB * 1024
-
-const UNITS: readonly [string, string, number][] = [
-  ['B', 'Byte', 1],
-
-  ['KB', 'Kilobyte', KB],
-  ['MB', 'Megabyte', MB],
-  ['GB', 'Gigabyte', GB],
-  ['TB', 'Terabyte', TB],
-  ['PB', 'Petabyte', PB],
-  ['EB', 'Exabyte', EB],
-  ['ZB', 'Zettabyte', ZB],
-  ['YB', 'Yottabyte', YB],
-
-  ['KiB', 'Kibibyte', KiB],
-  ['MiB', 'Mebibyte', MiB],
-  ['GiB', 'Gibibyte', GiB],
-  ['TiB', 'Tebibyte', TiB],
-  ['PiB', 'Pebibyte', PiB],
-  ['EiB', 'Exbibyte', EiB],
-  ['ZiB', 'Zebibyte', ZiB],
-  ['YiB', 'Yobibyte', YiB]
+const METRIC: Readonly<[string, string][]> = [
+  ['KB', 'Kilobyte'],
+  ['MB', 'Megabyte'],
+  ['GB', 'Gigabyte'],
+  ['TB', 'Terabyte'],
+  ['PB', 'Petabyte'],
+  ['EB', 'Exabyte'],
+  ['ZB', 'Zettabyte'],
+  ['YB', 'Yottabyte']
 ]
 
-export const INPUT_PATTERN = /^[1-9][0-9]* (B|KB|MB|GB|TB|PB|EB|ZB|YT|KiB|MiB|GiB|TiB|PiB|EiB|ZiB|YiB|(Byte|Kilobyte|Megabyte|Gigabyte|Terabyte|Petabyte|Exabyte|Zettabyte|Yottabyte|Kibibyte|Mebibyte|Gibibyte|Tebibyte|Pebibyte|Exbibyte|Zebibyte|Yobibyte)s?)$/
+const BINARY: Readonly<[string, string][]> = [
+  ['KiB', 'Kibibyte'],
+  ['MiB', 'Mebibyte'],
+  ['GiB', 'Gibibyte'],
+  ['TiB', 'Tebibyte'],
+  ['PiB', 'Pebibyte'],
+  ['EiB', 'Exbibyte'],
+  ['ZiB', 'Zebibyte'],
+  ['YiB', 'Yobibyte']
+]
 
 /**
  * Convert bytes to readable size and vice versa.
@@ -98,123 +79,82 @@ export const INPUT_PATTERN = /^[1-9][0-9]* (B|KB|MB|GB|TB|PB|EB|ZB|YT|KiB|MiB|Gi
 export function bytes(
   value: number,
   options?: {
-    long?: boolean
-    format?: 'string'
-    prefix?: 'metric' | 'binary'
+    fmt?: 'long' | 'short'
+    unit?: 'metric' | 'binary'
   }
 ): `${number} ${Unit}`
-
-export function bytes(
-  value: number,
-  options?: {
-    long?: boolean
-    format?: 'array'
-    prefix?: 'metric' | 'binary'
-  }
-): [number, Unit]
 
 export function bytes(value: `${number} ${Unit}`): number
 
 export function bytes(
-  value: `${number} ${Unit}` | number,
-  options?: {
-    long?: boolean
-    format?: 'string' | 'array'
-    prefix?: 'metric' | 'binary'
-  }
-): `${number} ${Unit}` | [number, Unit] | number {
-  const long = options?.long ?? false
-  , array = options?.format === 'array'
-  , binary = options?.prefix === 'binary'
-
-  if (typeof value === 'number') {
-    const stringifiedSize: string = value.toString()
-    
-    , length = stringifiedSize.length
-    
-    , round = (
-      number: number,
-      decimalPlaces: number
-    ) =>
-      Number(
-        Math.round(
-          Number(number + 'e' + decimalPlaces),
-        ) + 'e' + -decimalPlaces,
-      )
-
-    , b = (
-      divisor: number,
-      longName: Unit,
-      shortName: Unit
-    ): `${number} ${Unit}` | [number, Unit] => {
-      const roundedValue = round(value / divisor, 2)
-        
-      , name = (long
-          ? `${longName}${roundedValue > 1 ? 's' : ''}`
-          : shortName) as Unit
-
-      return array
-        ? [roundedValue, name]
-        : `${roundedValue} ${name}`
-    }
-
-    return length >= 4 && length < 7
-      ? (
-        binary ? b(KiB, 'Kibibyte', 'KiB') : b(KB, 'Kilobyte', 'KB')
-      )
-      : length >= 7 && length < 10
-      ? (
-        binary ? b(MiB, 'Mebibyte', 'MiB') : b(MB, 'Megabyte', 'MB')
-      )
-      : length >= 10 && length < 13
-      ? (
-        binary ? b(GiB, 'Gibibyte', 'GiB') : b(GB, 'Gigabyte', 'GB')
-      )
-      : length >= 13 && length < 16
-      ? (
-        binary ? b(TiB, 'Tebibyte', 'TiB') : b(TB, 'Terabyte', 'TB')
-      )
-      : length >= 16 && length < 19
-      ? (
-        binary ? b(PiB, 'Pebibyte', 'PiB') : b(PB, 'Petabyte', 'PB')
-      )
-      : length >= 19 && length < 22
-      ? (
-        binary ? b(EiB, 'Exbibyte', 'EiB') : b(EB, 'Exabyte', 'EB')
-      )
-      : length >= 22 && length < 25
-      ? (
-        binary ? b(ZiB, 'Zebibyte', 'ZiB') : b(ZB, 'Zettabyte', 'ZB')
-      )
-      : length >= 25
-      ? (
-        binary ? b(YiB, 'Yobibyte', 'YiB') : b(YB, 'Yottabyte', 'YB')
-      )
-      : b(1, 'Byte', 'B')
-  } else {
-    if (!INPUT_PATTERN.test(value))
-      throw new Error('Please enter a valid string value, e.g. "25 Kilobytes"!')
-
-    const arr = value.split(' ')
+  val: `${number} ${Unit}` | number,
+  opt: {
+    fmt?: 'long' | 'short'
+    unit?: 'metric' | 'binary'
+  } = {}
+): `${number} ${Unit}` | number {
+  if (typeof val === 'string') {
+    const arr = val.split(' ')
 
     if (arr.length !== 2)
-      return -1
+      throw Error()
 
     if (arr[1].endsWith('s'))
       arr[1] = arr[1].slice(0, -1)
 
-    const length = UNITS.length
+    if (arr[1] === 'B' || arr[1] === 'Byte')
+      return parseInt(arr[0])
 
-    let i = 0
-    , b = -1
+    for (let i = 0; i < BINARY.length; i++)
+      if (arr[1] === BINARY[i][0] || arr[1] === BINARY[i][1])
+        return parseInt(arr[0]) * 1024 ** (i + 1)
 
-    while (i < length) {
-      if (arr[1] === UNITS[i][0] || arr[1] === UNITS[i][1])
-        b = parseInt(arr[0]) * UNITS[i][2]
+    for (let i = 0; i < METRIC.length; i++)
+      if (arr[1] === METRIC[i][0] || arr[1] === METRIC[i][1])
+        return parseInt(arr[0]) * 1000 ** (i + 1)
 
-      i++
-    }
-
-    return b
+    throw Error()
   }
+
+  let div = 1000
+  , units = METRIC
+
+  if (opt.unit === 'binary') {
+    div = 1024
+    units = BINARY
+  }
+
+  if (val < div) {
+    const unit = opt.fmt === 'long' ? 'Byte' : 'B'
+
+    return val + ' ' + unit as `${number} ${Unit}`
+  }
+
+  let i = 0
+  , rest = val
+
+  while (rest >= div && i < 8) {
+    rest = val / (div ** (i + 1))
+
+    i++
+  }
+
+  let unit
+
+  if (opt.fmt === 'long') {
+    unit = units[i - 1][1]
+
+    if (rest > 1)
+      unit += 's'
+  } else {
+    unit = units[i - 1][0]
+  }
+
+  rest = Number(
+    Math.round(
+      Number(rest + 'e' + 2)
+    ) + 'e' + -2
+  )
+
+  return rest + ' ' + unit as `${number} ${Unit}`
 }
