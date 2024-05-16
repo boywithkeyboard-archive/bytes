@@ -1,6 +1,6 @@
 {
   "name": "@boywithkeyboard/bytes",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "author": "Samuel Kopp (https://samuelkopp.de)",
   "license": "Apache-2.0",
   "description": "A disk unit conversion library for JavaScript.",
@@ -10,11 +10,28 @@
     "bytes",
     "conversion"
   ],
+  "main": "./build/index.js",
+  "module": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./build/index.js",
+        "types": "./build/index.d.ts"
+      }
+    }
+  },
   "scripts": {
-    "build": "builder index.ts:index.js"
+    "build": "rimraf build && tsc && esbuild index.ts --bundle --minify --format=esm --outfile=build/index.js",
+    "test": "npm run build && node --test"
   },
   "devDependencies": {
-    "@boywithkeyboard/builder": "^0.14.0",
+    "esbuild": "^0.21.3",
+    "rimraf": "^5.0.7",
     "typescript": "^5.4.5"
-  }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module"
 }
