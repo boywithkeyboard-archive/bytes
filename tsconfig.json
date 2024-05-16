@@ -6,13 +6,11 @@
       "DOM",
       "ES2022"
     ],
-    "skipLibCheck": true,
     "strict": true,
     "declaration": true,
     "emitDeclarationOnly": true,
     "moduleResolution": "Bundler",
-    "outDir": "build",
-    "resolveJsonModule": true
+    "outDir": "build"
   },
   "include": [
     "**/*.ts"
